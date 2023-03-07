@@ -13,6 +13,42 @@ function getPlayerChoice (){
     }
     else {
         alert('Valor icorrecto');
-        getPlayerChoice();
+        return getPlayerChoice();
     }
+}
+
+function playRound(){
+    let computerChoise = getComputerChoice();
+    let playerChoise = getPlayerChoice();
+    console.log(playerChoise);
+
+    if (playerChoise == "scissors"){
+        if(computerChoise == "paper") {
+            alert('u win');
+        }
+        else if ( computerChoise == "rock"){
+            alert('u lose')
+        }
+    }
+    else if (playerChoise == "rock"){
+        if(computerChoise == "scissors") {
+            alert('u win');
+        }
+        else if ( computerChoise == "paper"){
+            alert('u lose')
+        }
+    }
+    else if( playerChoise == "paper") {
+        if(computerChoise == "rock") {
+            alert('u win');
+        }
+        else if ( computerChoise == "scissors"){
+            alert('u lose')
+        }
+    }
+    else {
+        alert('Draw');
+    }
+    console.log(computerChoise);
+    console.log(playerChoise);
 }
