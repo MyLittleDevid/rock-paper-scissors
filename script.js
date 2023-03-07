@@ -20,35 +20,61 @@ function getPlayerChoice (){
 function playRound(){
     let computerChoise = getComputerChoice();
     let playerChoise = getPlayerChoice();
-    console.log(playerChoise);
 
     if (playerChoise == "scissors"){
         if(computerChoise == "paper") {
             alert('u win');
+            playerScore++;
         }
         else if ( computerChoise == "rock"){
-            alert('u lose')
+            alert('u lose');
+            computerScore++;
         }
     }
     else if (playerChoise == "rock"){
         if(computerChoise == "scissors") {
             alert('u win');
+            playerScore++;
         }
         else if ( computerChoise == "paper"){
-            alert('u lose')
+            alert('u lose');
+            computerScore++;
         }
     }
     else if( playerChoise == "paper") {
         if(computerChoise == "rock") {
             alert('u win');
+            playerScore++;
         }
         else if ( computerChoise == "scissors"){
-            alert('u lose')
+            alert('u lose');
+            computerScore++;
         }
     }
     else {
         alert('Draw');
     }
-    console.log(computerChoise);
-    console.log(playerChoise);
+}
+
+let computerScore = 0;
+let playerScore = 0;
+
+function game() {
+    computerScore = 0;
+    playerScore= 0;
+
+    for(let i =0; i<5;i++){
+        playRound(); 
+        console.log(computerScore+ " "+ playerScore);
+    }
+
+    if(playerScore > computerScore) {
+        alert('Man u better than this old pc crap');
+    }
+    else if (playerScore < computerScore) {
+        alert('Go and work in MC');
+    }
+    else {
+       alert('U two are the same bas ass')
+    }
 }
