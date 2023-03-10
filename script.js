@@ -4,77 +4,67 @@ function getComputerChoice (){
     return options[randomIndex];
 }
 
-function getPlayerChoice (){
-    const options = ["scissors", "rock", "paper"];
-    let option = (prompt('Write your choise in englis')).toLowerCase();
-    
-    if(options.includes(option)){
-        return option;
-    }
-    else {
-        alert('Valor icorrecto');
-        return getPlayerChoice();
-    }
-}
-
-function playRound(){
-    let computerChoise = getComputerChoice();
-    let playerChoise = getPlayerChoice();
-
-    if (playerChoise == "scissors"){
-        if(computerChoise == "paper") {
-            alert('u win');
-            playerScore++;
-        }
-        else if ( computerChoise == "rock"){
-            alert('u lose');
-            computerScore++;
-        }
-    }
-    else if (playerChoise == "rock"){
-        if(computerChoise == "scissors") {
-            alert('u win');
-            playerScore++;
-        }
-        else if ( computerChoise == "paper"){
-            alert('u lose');
-            computerScore++;
-        }
-    }
-    else if( playerChoise == "paper") {
-        if(computerChoise == "rock") {
-            alert('u win');
-            playerScore++;
-        }
-        else if ( computerChoise == "scissors"){
-            alert('u lose');
-            computerScore++;
-        }
-    }
-    else {
-        alert('Draw');
-    }
-}
-
 let computerScore = 0;
 let playerScore = 0;
 
-function game() {
-    computerScore = 0;
-    playerScore= 0;
+function playRound(boton){
+    let computerChoise = getComputerChoice();
+    let playerChoise = boton.getAttribute('value');
 
-    for(let i =0; i<5;i++){
-        playRound(); 
-        console.log(computerScore+ " "+ playerScore);
-    }
+    const score = document.querySelector('.score > p');
 
-    if(playerScore > computerScore) {
-        alert('Man u better than this old pc crap');
-    }
-    else if (playerScore < computerScore) {
-        alert('Go and work in MC');
+    if(computerChoise === playerChoise){
+        score.textContent = `Empate sois igual de tontos. Tu: ${playerScore}, la maquinita: ${computerScore}`;
     }
     else {
-       alert('U two are the same bas ass')
+        if (playerChoise == "scissors"){
+            if(computerChoise == "paper") {
+                playerScore++;
+                score.textContent = `Ganas crack. Tu: ${playerScore}, la maquinita: ${computerScore}`;
+                
+            }
+            else{
+                computerScore++;
+                score.textContent = `Pierdes marica. Tu: ${playerScore}, la maquinita: ${computerScore}`;
+            }
+        }
+        else if (playerChoise == "rock"){
+            if(computerChoise == "scissors") {
+                playerScore++;
+                score.textContent = `Toma toma. Tu: ${playerScore}, la maquinita: ${computerScore}`;
+            }
+            else{
+                computerScore++;
+                score.textContent = `Te dio ala ala. Tu: ${playerScore}, la maquinita: ${computerScore}`;
+            }
+        }
+        else if( playerChoise == "paper") {
+            if(computerChoise == "rock") {
+                playerScore++;
+                score.textContent = `Respetable. Tu: ${playerScore}, la maquinita: ${computerScore}`;
+            }
+            else{
+                computerScore++;
+                score.textContent = `Te pica eh. Tu: ${playerScore}, la maquinita: ${computerScore}`;
+            }
+        }
+    }
+
+    if(playerScore == 5){
+        score.textContent = 'Ganaste, estas bien mamado';
+        playerScore = 0;
+        computerScore=0;
+    }
+    if(computerScore == 5){
+        score.textContent = 'Nooo remalo el amigo';
+        playerScore = 0;
+        computerScore=0;
     }
 }
+
+const botones = Array.from(document.querySelectorAll('.buttons > button'));
+
+botones.forEach((boton)=> {
+    boton.addEventListener('click', () => playRound(boton))
+});
+
